@@ -178,3 +178,46 @@ $ tree
 $ java -cp target/JavaApp-1.0-SNAPSHOT.jar com.digi.proj1.App
 Hello World!
 
+Setup Web Application
+$ mvn archetype:generate | grep maven-archetype-webapp
+1386: remote -> org.apache.maven.archetypes:maven-archetype-webapp (An archetype which contains a sample Maven Webapp project.)
+$ mvn archetype:generate
+Confirm properties configuration:
+groupId: com.digi.proj2
+artifactId: WebApp
+version: 1.0-SNAPSHOT
+package: com.digi.proj2
+
+$ cd WebApp/
+
+$ tree
+.
+├── pom.xml
+└── src
+    └── main
+        └── webapp
+            ├── index.jsp
+            └── WEB-INF
+                └── web.xml
+$ mvn package
+
+$ tree
+.
+├── pom.xml
+├── src
+│   └── main
+│       └── webapp
+│           ├── index.jsp
+│           └── WEB-INF
+│               └── web.xml
+└── target
+    ├── maven-archiver
+    │   └── pom.properties
+    ├── WebApp
+    │   ├── index.jsp
+    │   ├── META-INF
+    │   └── WEB-INF
+    │       ├── classes
+    │       └── web.xml
+    └── WebApp.war
+
