@@ -1,2 +1,180 @@
 Maven Details:
 https://docs.google.com/document/d/1OBpzKWYJFfLd3XIZw150NhX6p6cgYspH33nF6qaybLg/edit?usp=sharing
+
+Setting Up Maven
+1). Maven needs Java, So we need to setup Java first then followed by Maven
+$ sudo yum -y install java-1.8.0 java-1.8.0-devel
+$ java -version
+openjdk version "1.8.0_212"
+OpenJDK Runtime Environment (build 1.8.0_212-b04)
+OpenJDK 64-Bit Server VM (build 25.212-b04, mixed mode)
+$ javac -version
+javac 1.8.0_212
+$ sudo yum -y install maven
+$ mvn --version
+Apache Maven 3.0.5 (Red Hat 3.0.5-17)
+Maven home: /usr/share/maven
+Java version: 1.8.0_212, vendor: Oracle Corporation
+Java home: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "3.10.0-957.21.3.el7.x86_64", arch: "amd64", family: "unix"
+
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 1381:
+Choose org.apache.maven.archetypes:maven-archetype-quickstart version:
+Confirm properties configuration:
+groupId: com.digi.proj1
+artifactId: JavaApp
+version: 1.0-SNAPSHOT
+package: com.digi.proj1
+
+$ cd JavaApp/
+$ sudo yum -y install tree
+$ tree
+.
+├── pom.xml
+└── src
+    ├── main
+    │   └── java
+    │       └── com
+    │           └── digi
+    │               └── proj1
+    │                   └── App.java
+    └── test
+        └── java
+            └── com
+                └── digi
+                    └── proj1
+                        └── AppTest.java
+
+$ mvn validate
+$ mvn compile
+
+$ tree
+.
+├── pom.xml
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── com
+│   │           └── digi
+│   │               └── proj1
+│   │                   └── App.java
+│   └── test
+│       └── java
+│           └── com
+│               └── digi
+│                   └── proj1
+│                       └── AppTest.java
+└── target
+    ├── classes
+    │   └── com
+    │       └── digi
+    │           └── proj1
+    │               └── App.class
+    ├── generated-sources
+    │   └── annotations
+    └── maven-status
+        └── maven-compiler-plugin
+            └── compile
+                └── default-compile
+                    ├── createdFiles.lst
+                    └── inputFiles.lst
+                    
+$ mvn test
+$ tree
+.
+├── pom.xml
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── com
+│   │           └── digi
+│   │               └── proj1
+│   │                   └── App.java
+│   └── test
+│       └── java
+│           └── com
+│               └── digi
+│                   └── proj1
+│                       └── AppTest.java
+└── target
+    ├── classes
+    │   └── com
+    │       └── digi
+    │           └── proj1
+    │               └── App.class
+    ├── generated-sources
+    │   └── annotations
+    ├── generated-test-sources
+    │   └── test-annotations
+    ├── maven-status
+    │   └── maven-compiler-plugin
+    │       ├── compile
+    │       │   └── default-compile
+    │       │       ├── createdFiles.lst
+    │       │       └── inputFiles.lst
+    │       └── testCompile
+    │           └── default-testCompile
+    │               ├── createdFiles.lst
+    │               └── inputFiles.lst
+    ├── surefire-reports
+    │   ├── com.digi.proj1.AppTest.txt
+    │   └── TEST-com.digi.proj1.AppTest.xml
+    └── test-classes
+        └── com
+            └── digi
+                └── proj1
+                    └── AppTest.class
+
+
+$ mvn package
+$ tree
+.
+├── pom.xml
+├── src
+│   ├── main
+│   │   └── java
+│   │       └── com
+│   │           └── digi
+│   │               └── proj1
+│   │                   └── App.java
+│   └── test
+│       └── java
+│           └── com
+│               └── digi
+│                   └── proj1
+│                       └── AppTest.java
+└── target
+    ├── classes
+    │   └── com
+    │       └── digi
+    │           └── proj1
+    │               └── App.class
+    ├── generated-sources
+    │   └── annotations
+    ├── generated-test-sources
+    │   └── test-annotations
+    ├── JavaApp-1.0-SNAPSHOT.jar
+    ├── maven-archiver
+    │   └── pom.properties
+    ├── maven-status
+    │   └── maven-compiler-plugin
+    │       ├── compile
+    │       │   └── default-compile
+    │       │       ├── createdFiles.lst
+    │       │       └── inputFiles.lst
+    │       └── testCompile
+    │           └── default-testCompile
+    │               ├── createdFiles.lst
+    │               └── inputFiles.lst
+    ├── surefire-reports
+    │   ├── com.digi.proj1.AppTest.txt
+    │   └── TEST-com.digi.proj1.AppTest.xml
+    └── test-classes
+        └── com
+            └── digi
+                └── proj1
+                    └── AppTest.class
+$ java -cp target/JavaApp-1.0-SNAPSHOT.jar com.digi.proj1.App
+Hello World!
+
