@@ -290,3 +290,43 @@ To deploy the App use:
 mvn tomcat7:deploy
 mvn tomcat7:redeploy
 
+Build Profiles
+
+Update in pom.xml
+
+  </dependencies>
+<profiles>
+ <profile>
+  <id>sandbox</id>
+  <build>
+  <plugins>
+  .
+  .
+  </plugins>
+ </profile>
+ <profile>
+  <id>dev</id>
+  <build>
+    <finalName>WebApp</finalName>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>2.2</version>
+          <configuration>
+          <url>http://35.224.233.188:8080/manager/text</url>
+          <server>TomcatServer</server>
+          <path>/WebApps</path>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+ </profile>
+</profiles>
+</project>
+
+
+mvn tomcat7:deploy -P dev
+mvn tomcat7:redeploy -P qa
