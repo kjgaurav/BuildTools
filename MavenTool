@@ -180,7 +180,7 @@ Hello World!
 
 Setup Web Application
 $ mvn archetype:generate | grep maven-archetype-webapp
-1386: remote -> org.apache.maven.archetypes:maven-archetype-webapp (An archetype which contains a sample Maven Webapp project.)
+1387: remote -> org.apache.maven.archetypes:maven-archetype-webapp (An archetype which contains a sample Maven Webapp project.)
 $ mvn archetype:generate
 Confirm properties configuration:
 groupId: com.digi.proj2
@@ -249,4 +249,44 @@ $ ./apache-tomcat-7.0.94/bin/shutdown.sh
 $ ./apache-tomcat-7.0.94/bin/startup.sh
 Browse the app manager on http://ip-add:8080
 
+
+Deploy To Tomcat using Maven
+Step1:
+Update pom.xml, add the following content after </dependencies> between <build> & <plugins> tags
+        <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>2.2</version>
+          <configuration>
+          <url>http://localhost:8080/manager/text</url>
+          <server>TomcatServer</server>
+          <path>/WebApps</path>
+          </configuration>
+        </plugin>
+
+Step2: Provide the script manager access, change tomcat-users.xml
+$ vim ~/apache-tomcat-7.0.94/conf/tomcat-users.xml
+  <user username="tomcat1" password="tomcat1" roles="manager-script"/>
+Restart Tomcat:
+$ ~/apache-tomcat-7.0.94/bin/shutdown.sh
+$ ~/apache-tomcat-7.0.94/bin/startup.sh
+
+Step3: We Need Tomcat - Maven Authentication
+~]$ cd .m2/
+.m2]$ touch settings.xml
+.m2]$ vim settings.xml
+<settings>
+   <servers>
+       <server>
+           <id>TomcatServer</id>
+           <username>tomcat1</username>
+           <password>tomcat1</password>
+       </server>
+   </servers>
+</settings>
+
+To deploy the App use:
+
+mvn tomcat7:deploy
+mvn tomcat7:redeploy
 
