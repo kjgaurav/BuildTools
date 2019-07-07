@@ -241,3 +241,12 @@ $ ps -ef | grep tomcat
 rsa-key+  4227     1  1 16:02 pts/0    00:00:03 /usr/bin/java -Djava.util.logging.config.file=/home/rsa-key-20190610/apache-tomcat-7.0.94/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djdk.tls.ephemeralDHKeySize=2048 -Dignore.endorsed.dirs= -classpath /home/rsa-key-20190610/apache-tomcat-7.0.94/bin/bootstrap.jar:/home/rsa-key-20190610/apache-tomcat-7.0.94/bin/tomcat-juli.jar -Dcatalina.base=/home/rsa-key-20190610/apache-tomcat-7.0.94 -Dcatalina.home=/home/rsa-key-20190610/apache-tomcat-7.0.94 -Djava.io.tmpdir=/home/rsa-key-20190610/apache-tomcat-7.0.94/temp org.apache.catalina.startup.Bootstrap start
 rsa-key+  4346  3245  0 16:06 pts/0    00:00:00 grep --color=auto tomcat
 
+Update the credentials in tomcat-users.xml
+Browse the app manager on http://ip-add:8080
+$ vim apache-tomcat-7.0.94/conf/tomcat-users.xml
+  <user username="tomcat" password="tomcat" roles="manager-gui"/>
+$ ./apache-tomcat-7.0.94/bin/shutdown.sh
+$ ./apache-tomcat-7.0.94/bin/startup.sh
+Browse the app manager on http://ip-add:8080
+
+
